@@ -3,6 +3,7 @@
 var ninja,
 	ninjaRun,
 	ninjaJump,
+	ninjaLean,
 	canvas,
 	frameIndex = 0;
 
@@ -34,6 +35,7 @@ function sprite(options) {
 	that.image = options.image;
 	that.numberOfFrames = options.numberOfFrames || 1;
 	that.jumping = options.jumping;
+	that.leaning= options.leaning;
 
 	//UPDATE
 
@@ -119,7 +121,7 @@ function sprite(options) {
 		ctx.stroke();
 
 
-		if (that.jumping && frameIndex === (that.numberOfFrames - 1)) {
+		if ((that.jumping || that.leaning) && frameIndex === (that.numberOfFrames - 1)) {
 
 			jumpIndex=0;	
 			Run();
@@ -144,6 +146,9 @@ ninjaRun.src = "run.png";
 ninjaJump = new Image();
 ninjaJump.src = 'jump.png';
 
+ninjaLean = new Image();
+ninjaLean.src = 'lean.png';
+
 
 
 ninja = sprite({
@@ -154,6 +159,7 @@ ninja = sprite({
 	numberOfFrames: 8,
 	ticksPerFrame: 4,
 	jumping: false,
+	leaning: false
 
 
 });
@@ -161,9 +167,10 @@ ninja = sprite({
 
 function Jump(ev) {
 
-	console.log('tuk')
-	if (ev.keyCode == 32 && !ninja.jumping) {
+	//console.log(ev)
+	if (ev.keyCode == 38 && !ninja.jumping) {
 		ninja.jumping = true;
+		ninja.leaning=false;
 		ninja.image = ninjaJump;
 		frameIndex = 0,
 			ticksPerFrame = 6;
@@ -171,10 +178,24 @@ function Jump(ev) {
 
 }
 
+function Lean(ev) {
+
+	if(ev.keyCode == 40 && !ninja.leaning){
+		ninja.jumping=false;
+		ninja.leaning=true;
+		ninja.image = ninjaLean;
+		frameIndex=0;
+		ticksPerFrame = 6;
+	}
+	
+
+}
+
 function Run() {
 
 	ninja.jumping = false;
-	ninja.image = ninjaRun,
+	ninja.leaning=false;
+	ninja.image = ninjaRun;
 		ticksPerFrame = 4;
 }
 
@@ -184,7 +205,8 @@ function Run() {
 
 window.addEventListener('load', gameLoop, false);
 
-window.addEventListener('keyup', Jump, false);
+window.addEventListener('keydown', Jump, false);
+window.addEventListener('keydown', Lean, false);
 
 
 
