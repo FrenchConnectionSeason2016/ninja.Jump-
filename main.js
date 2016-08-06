@@ -5,16 +5,21 @@ var ninja,
 	ninjaJump,
 	ninjaLean,
 	canvas,
-	frameIndex = 0;
+	frameIndex = 0,
+	WIDTH = 800,
+	HEIGHT = 500,
+	backgroundImage;
 
 
 function gameLoop() {
 
-	window.requestAnimationFrame(gameLoop);
+	backgroundImage.render().update();
 
 	ninja.update();
 	ninja.updateJumpIndex();
 	ninja.render();
+
+	window.requestAnimationFrame(gameLoop);
 }
 
 function sprite(options) {
@@ -84,7 +89,7 @@ function sprite(options) {
 
 
 
-		that.context.clearRect(0, 0, 600, 400);	
+		that.context.clearRect(0, 0, WIDTH, HEIGHT);	
 
 	
 		// if (that.jumping) {
@@ -136,8 +141,8 @@ function sprite(options) {
 
 
 canvas = document.getElementById("gamePlace");
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = WIDTH;
+canvas.height = HEIGHT;
 
 
 ninjaRun = new Image();
@@ -202,6 +207,14 @@ function Run() {
 
 
 //var body = document.getElementsByTagName('body')[0];
+function background(){
+	backgroundImage = createBackgroundImage({
+		width: WIDTH,
+		height: HEIGHT
+	});
+}
+
+window.addEventListener('load', background, false);
 
 window.addEventListener('load', gameLoop, false);
 

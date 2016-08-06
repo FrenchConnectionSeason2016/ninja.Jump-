@@ -2,3 +2,15 @@ canvas{
    border: 1px solid black;
    position: absolute;
 }
+
+#background-canvas{
+    z-index: 1;
+}
+
+#gamePlace{
+    z-index: 5;
+}
+
+img{
+    display: none;
+}
