@@ -141,13 +141,13 @@ canvas.height = 400;
 
 
 ninjaRun = new Image();
-ninjaRun.src = "run.png";
+ninjaRun.src = "images/run.png";
 
 ninjaJump = new Image();
-ninjaJump.src = 'jump.png';
+ninjaJump.src = 'images/jump.png';
 
 ninjaLean = new Image();
-ninjaLean.src = 'lean.png';
+ninjaLean.src = 'images/lean.png';
 
 
 
