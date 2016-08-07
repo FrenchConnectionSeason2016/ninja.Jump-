@@ -5,12 +5,14 @@ function startGame() {
 		canvas,
 		WIDTH = 800,
 		HEIGHT = 500,
-		backgroundImage;
+		backgroundImage,
+		obstacles;
 
 
 	function gameLoop() {
 
 		backgroundImage.render().update();
+		obstacles.renderAndUpdate().spawn();
 
 		ninja.update();
 		ninja.updateJumpIndex();
@@ -38,6 +40,12 @@ function startGame() {
 	backgroundImage = createBackgroundImage({
 		width: WIDTH,
 		height: HEIGHT
+	});
+
+	obstacles = createObstacles({
+		width: WIDTH,
+		height: HEIGHT,
+		positionY: 356
 	});
 
 	window.addEventListener('keydown', ninja.jump, false);

@@ -8,6 +8,10 @@ canvas{
 }
 
 #gamePlace{
+    z-index: 10;
+}
+
+#game-objects{
     z-index: 5;
 }
 
