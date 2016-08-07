@@ -1,225 +1,59 @@
+function startGame() {
+	// start screen logic
+
+	var ninja,
+		canvas,
+		WIDTH = 800,
+		HEIGHT = 500,
+		backgroundImage;
 
 
-var ninja,
-	ninjaRun,
-	ninjaJump,
-	ninjaLean,
-	canvas,
-	frameIndex = 0,
-	WIDTH = 800,
-	HEIGHT = 500,
-	backgroundImage;
+	function gameLoop() {
 
+		backgroundImage.render().update();
 
-function gameLoop() {
+		ninja.update();
+		ninja.updateJumpIndex();
+		ninja.render();
 
-	backgroundImage.render().update();
-
-	ninja.update();
-	ninja.updateJumpIndex();
-	ninja.render();
-
-	window.requestAnimationFrame(gameLoop);
-}
-
-function sprite(options) {
-
-	var that = {},
-		tickCount = 0,
-		ticksPerFrame = options.ticksPerFrame || 0,
-		jumpIndex = 0;
-
-	//numberOfFrames = options.numberOfFrames || 1;
-
-		  var altitude = 336;
-
-
-	that.context = options.context;
-	that.width = options.width;
-	that.height = options.height;
-	that.image = options.image;
-	that.numberOfFrames = options.numberOfFrames || 1;
-	that.jumping = options.jumping;
-	that.leaning= options.leaning;
-
-	//UPDATE
-
-	that.update = function () {
-
-		
-
-		tickCount += 1;
-
-		if (tickCount > ticksPerFrame) {
-
-			tickCount = 0;
-
-			if (frameIndex < that.numberOfFrames - 1) {
-
-				frameIndex += 1;
-			} else {
-				frameIndex = 0;
-			}
-		}
-	};
-
-
-	that.updateJumpIndex = function () {
-
-		if (that.jumping) {
-			
-			if ( jumpIndex < 17) {
-				altitude -= 6;
-			} else {
-				altitude += 6;
-			}
-
-			jumpIndex+=1;
-
-		} else {
-			altitude = 336;
-		}
-		
-
+		window.requestAnimationFrame(gameLoop);
 	}
 
+	canvas = document.getElementById("gamePlace");
+	canvas.width = WIDTH;
+	canvas.height = HEIGHT;
 
-	//RENDER
-	that.render = function () {
+	ninja = ninjaSprite({
+		canvas: canvas,
+		context: canvas.getContext("2d"),
+		width: 512,
+		height: 64,
+		numberOfFrames: 8,
+		ticksPerFrame: 4,
+		frameIndex: 0,
+		jumping: false,
+		leaning: false,
+	});
 
-
-
-		that.context.clearRect(0, 0, WIDTH, HEIGHT);	
-
-	
-		// if (that.jumping) {
-		// 		console.log(jumpIndex);	
-
-
-		// 	if ( jumpIndex < 17) {
-		// 		altitude -= 6;
-		// 	} else {
-		// 		altitude += 6;
-		// 	}
-
-		// 	jumpIndex+=1;
-
-		// } else {
-		// 	altitude = 336;
-		// }
-		
-		    that.context.drawImage(
-			that.image,
-			frameIndex * that.width / that.numberOfFrames,
-			0,
-			that.width / that.numberOfFrames,
-			that.height,
-			270,
-			altitude,
-			that.width / that.numberOfFrames,
-			that.height);
-
-		var ctx = canvas.getContext('2d');
-		ctx.beginPath();
-		ctx.moveTo(0, 250);
-		ctx.lineTo(600, 250);
-		ctx.stroke();
-
-
-		if ((that.jumping || that.leaning) && frameIndex === (that.numberOfFrames - 1)) {
-
-			jumpIndex=0;	
-			Run();
-			frameIndex = 0;	
-		}
-	};
-
-
-
-	return that;
-}
-
-
-canvas = document.getElementById("gamePlace");
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
-
-
-ninjaRun = new Image();
-ninjaRun.src = "images/run.png";
-
-ninjaJump = new Image();
-ninjaJump.src = 'images/jump.png';
-
-ninjaLean = new Image();
-ninjaLean.src = 'images/lean.png';
-
-
-
-ninja = sprite({
-	context: canvas.getContext("2d"),
-	width: 512,
-	height: 64,
-	image: ninjaRun,
-	numberOfFrames: 8,
-	ticksPerFrame: 4,
-	jumping: false,
-	leaning: false
-
-
-});
-
-
-function Jump(ev) {
-
-	//console.log(ev)
-	if (ev.keyCode == 38 && !ninja.jumping) {
-		ninja.jumping = true;
-		ninja.leaning=false;
-		ninja.image = ninjaJump;
-		frameIndex = 0,
-			ticksPerFrame = 6;
-	}
-
-}
-
-function Lean(ev) {
-
-	if(ev.keyCode == 40 && !ninja.leaning){
-		ninja.jumping=false;
-		ninja.leaning=true;
-		ninja.image = ninjaLean;
-		frameIndex=0;
-		ticksPerFrame = 6;
-	}
-	
-
-}
-
-function Run() {
-
-	ninja.jumping = false;
-	ninja.leaning=false;
-	ninja.image = ninjaRun;
-		ticksPerFrame = 4;
-}
-
-
-
-//var body = document.getElementsByTagName('body')[0];
-function background(){
 	backgroundImage = createBackgroundImage({
 		width: WIDTH,
 		height: HEIGHT
 	});
+
+	window.addEventListener('keydown', ninja.jump, false);
+	window.addEventListener('keydown', ninja.lean, false);
+
+	gameLoop();
+
+
+
+	// end screen logic
 }
 
-window.addEventListener('load', background, false);
 
-window.addEventListener('load', gameLoop, false);
 
-window.addEventListener('keydown', Jump, false);
-window.addEventListener('keydown', Lean, false);
+window.addEventListener('load', startGame, false);
+
 
 
 
