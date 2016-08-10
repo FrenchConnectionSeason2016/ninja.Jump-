@@ -27,7 +27,9 @@ function startGame() {
 		goldNinja.update();
 		goldNinja.updateJumpIndex();
 
-		collideWithBonus(goldNinja, bonuses.goldBonusesArray);
+		if(collideWithBonus(goldNinja, bonuses.goldBonusesArray)){
+			goldBonuses+=1;
+		}
 		collideWithObstacles(goldNinja, obstacles.obstaclesArray);
 		if(goldNinja.collided){
 			return;
@@ -37,11 +39,15 @@ function startGame() {
 		greyNinja.update();
 		greyNinja.updateJumpIndex();
 
-		collideWithBonus(greyNinja, bonuses.greyBonusesArray);
+		if(collideWithBonus(greyNinja, bonuses.greyBonusesArray)){
+			greyBonuses+=1;
+		}
 		collideWithObstacles(greyNinja, obstacles.obstaclesArray);
 		// if(greyNinja.collided){
 		// 	return;
 		// }
+
+		drawScore(goldBonuses, greyBonuses);
 
 		window.requestAnimationFrame(gameLoop);
 	}
@@ -95,6 +101,7 @@ function startGame() {
 		positionY: 280
 	});
 
+
 	window.addEventListener('keydown', function(event){
 		if(event.keyCode === 38 && !goldNinja.jumping){
 			goldNinja.jump();
@@ -111,6 +118,12 @@ function startGame() {
 			greyNinja.lean();
 		}
 	});
+
+	points = drawScore({
+		width: WIDTH,
+		height: HEIGHT
+	});
+
 
 	gameLoop();
 
