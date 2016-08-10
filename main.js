@@ -16,7 +16,6 @@ function startGame() {
 		obstacles.renderAndUpdate().spawn(bonuses.goldBonusesArray);
 		bonuses.renderAndUpdate().spawn(obstacles.obstaclesArray);
 		drawScore();
-
 		ninja.update();
 		ninja.updateJumpIndex();
 		ninja.render();
@@ -63,6 +62,11 @@ function startGame() {
 		width: WIDTH,
 		height: HEIGHT,
 		positionY: 280
+	});
+
+	points = drawScore({
+		width: WIDTH,
+		height: HEIGHT
 	});
 
 	window.addEventListener('keydown', ninja.jump, false);
