@@ -20,6 +20,12 @@ function startGame() {
 		ninja.updateJumpIndex();
 		ninja.render();
 
+		collideWithBonus(ninja, bonuses.goldBonusesArray);
+		collideWithObstacles(ninja, obstacles.obstaclesArray);
+		if(ninja.collided){
+			return;
+		}
+
 		window.requestAnimationFrame(gameLoop);
 	}
 
@@ -63,7 +69,7 @@ function startGame() {
 
 	gameLoop();
 
-
+	console.log("game over");
 
 	// end screen logic
 }

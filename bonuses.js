@@ -39,7 +39,7 @@ function createBonuses(options) {
             newGreyBonus = createBonus({
                 canvas: bonusesCanvas,
                 context: bonusesContext,
-                image: goldStar,
+                image: greyStar,
                 positionX: width,
                 positionY: positionY,
                 width: goldStar.width / 7,
@@ -52,7 +52,7 @@ function createBonuses(options) {
             newGoldBonus = createBonus({
                 canvas: bonusesCanvas,
                 context: bonusesContext,
-                image: greyStar,
+                image: goldStar,
                 positionX: width + distance,
                 positionY: positionY,
                 width: goldStar.width / 7,
@@ -121,6 +121,18 @@ function createBonuses(options) {
 
 function createBonus(options) {
 
+    function removeBonus(){
+        var that = this,
+            offset = 15;
+
+        that.context.clearRect(
+            that.lastX - offset,
+            that.lastY - offset,
+            that.width + 2 * offset,
+            that.height + 2 * offset
+        );
+        
+    }
 
     function update() {
         var that = this;
@@ -203,7 +215,8 @@ function createBonus(options) {
         tickCount: 0,
         ticksPerFrame: options.ticksPerFrame,
         update: update,
-        render: render
+        render: render,
+        removeBonus: removeBonus
     };
 
     return bonus;

@@ -1,53 +1,68 @@
-function collideWithObstacle(ninja, obstacle) {
+function collideWithObstacles(ninja, obstaclesArray) {
+    var ninjaX = ninja.x + ninja.width /(ninja.numberOfFrames * 2);
+    var ninjaY = ninja.y + ninja.height / 2;
+    var ninjaRadius = ninja.height / 2;
+    var i;
+    var obstacle;
 
+    if (ninja.leaning) {
 
-var ninjaX = ninja.x+ninja.width/2;
-var ninjaY = ninja.y+ninja.height/2;
+        ninjaY = ninjaY + ninja.height / 2;
+        ninjaRadius = ninjaRadius / 2;
 
-var obstacleX = obstacle.positionX+obstacle.width/2;
-var obstacleY = obstacle.positionY+obstacle.height/2;
+    }
 
-var ninjaRadius = ninja.height/2;
-var obstacleRadius = ninja.height/2;
+    for (i = 0; i < obstaclesArray.length; i += 1) {
+        obstacle = obstaclesArray[i];
 
-if (ninja.leaning) {
+        var obstacleX = obstacle.positionX + obstacle.width / 2;
+        var obstacleY = obstacle.positionY + obstacle.height / 2;
+        var obstacleRadius = obstacle.width / 2 - 15;
 
-    ninjaY = ninjaY+ninja.height/2;
-    ninjaRadius=ninjaRadius/2;
+        var dist = distance(ninjaX, ninjaY, obstacleX, obstacleY);
+
+        if (dist < (ninjaRadius + obstacleRadius)) {
+
+            ninja.collided = true;
+            return true;
+        }
+    }
+
+    return false;
 
 }
 
-var dist = distance(ninjaX,ninjaY,obstacleX,obstacleY);
+function collideWithBonus(ninja, bonusesArray) {
 
-if (dist< (ninjaRadius + obstacleRadius)) {
-    
-    ninja.collided=true;
-}
-    
-}
+    var ninjaX = ninja.x + ninja.width /(ninja.numberOfFrames * 2);
+    var ninjaY = ninja.y + ninja.height / 2;
 
+    if (bonusesArray.length < 1) {
+        return false;
+    }
+    var bonus = bonusesArray[0];
+    var bonusX = bonus.positionX + bonus.width / 2;
+    var bonusY = bonus.positionY + bonus.height / 2;
+    var ninjaRadius = ninja.height / 2 ;
+    var bonusRadius = bonus.height / 2;
+    var i;
 
-function collideWithBonus(ninja, bonus) {
-     
-    var ninjaX = ninja.x+ninja.width/2;
-    var ninjaY = ninja.y+ninja.height/2;
-    var bonusX = bonus.positionX+bonus.width/2;    
-    var bonusY = bonus.positionY+bonus.height/2;
-    var ninjaRadius = ninja.height/2;
-    var bonusRadius = bonus.height/2;   
+    for (i = 0; i < bonusesArray.length; i += 1) {
+        var dist = distance(ninjaX, ninjaY, bonusX, bonusY);
 
-    var dist = distance(ninjaX,ninjaY,bonusX,bonusY);
-    
-    if(dist<( ninjaRadius +bonusRadius)){
-
-        bonus.isCollected = true;
-
+        if (dist < (ninjaRadius + bonusRadius)) {
+            bonus.isCollected = true;
+            //debugger;
+            bonus.removeBonus();
+            bonusesArray.splice(i,1);
+            return true;
+        }
     }
 
 }
 
 
 function distance(x1, y1, x2, y2) {
-    
-    return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+
+    return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
