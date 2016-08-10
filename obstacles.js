@@ -2,26 +2,33 @@ function createObstacles(options) {
     var obstaclesCanvas = document.getElementById('game-objects'),
         obstaclesContext = obstaclesCanvas.getContext('2d'),
         jumpImage = document.getElementById('beach-chair'),
-        duckImage = document.getElementById('umbrella');
+        duckImage = document.getElementById('umbrella'),
+        width = options.width,
+        height = options.height;
 
-    obstaclesCanvas.width = options.width;
-    obstaclesCanvas.height = options.height;
+    obstaclesCanvas.width = width;
+    obstaclesCanvas.height = height;
    
     // function rand(low, high) {
     //         return Math.floor( Math.random() * (high - low + 1) + low );
     //     }
 
-    function spawn() {
+    function spawn(goldBonusesArray) {
         var that = this,
             obstaclesArray = that.obstaclesArray,
             newObstacle,
             randomNum,
-            distance = 100,
-            lastObstacle = obstaclesArray[obstaclesArray.length - 1];
+            distance = 70,
+            lastObstacle = obstaclesArray[obstaclesArray.length - 1],
+            lastBonus = goldBonusesArray[goldBonusesArray.length-1];
 
-        if(lastObstacle && lastObstacle.positionX + lastObstacle.width + distance > obstaclesCanvas.width){
+        if(lastObstacle && lastObstacle.positionX + lastObstacle.width + distance > width){
             return that;
         }
+
+         if(lastBonus && lastBonus.positionX + lastBonus.width + distance > width){
+             return that;
+         }
         
         randomNum = Math.random();
         if(randomNum <= 0.02){
