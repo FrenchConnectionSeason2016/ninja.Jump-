@@ -72,7 +72,7 @@ function ninjaSprite(options) {
 		}
 		
 
-	}
+	};
 
 
 	//RENDER

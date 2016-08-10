@@ -4,15 +4,17 @@ function startGame() {
 	var ninja,
 		canvas,
 		WIDTH = 800,
-		HEIGHT = 500,
+		HEIGHT = 422,
 		backgroundImage,
-		obstacles;
+		obstacles,
+		bonuses;
 
 
 	function gameLoop() {
 
 		backgroundImage.render().update();
-		obstacles.renderAndUpdate().spawn();
+		obstacles.renderAndUpdate().spawn(bonuses.goldBonusesArray);
+		bonuses.renderAndUpdate().spawn(obstacles.obstaclesArray);
 
 		ninja.update();
 		ninja.updateJumpIndex();
@@ -48,6 +50,12 @@ function startGame() {
 		width: WIDTH,
 		height: HEIGHT,
 		positionY: 356
+	});
+
+	bonuses = createBonuses({
+		width: WIDTH,
+		height: HEIGHT,
+		positionY: 280
 	});
 
 	window.addEventListener('keydown', ninja.jump, false);
