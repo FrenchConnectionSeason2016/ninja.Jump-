@@ -15,6 +15,7 @@ function startGame() {
 		backgroundImage.render().update();
 		obstacles.renderAndUpdate().spawn(bonuses.goldBonusesArray);
 		bonuses.renderAndUpdate().spawn(obstacles.obstaclesArray);
+		drawScore();
 
 		ninja.update();
 		ninja.updateJumpIndex();
