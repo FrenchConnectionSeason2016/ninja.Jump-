@@ -77,10 +77,10 @@ function ninjaSprite(options) {
 
 	//RENDER
 	that.render = function () {
+		var offset=15;
 
 
-
-		that.context.clearRect(0, 0, that.canvas.width, that.canvas.height);	
+		that.context.clearRect(that.x - offset, that.y - offset, that.width / that.numberOfFrames + 2*offset, that.height + 2*offset);	
 
 	
 		// if (that.jumping) {
@@ -125,30 +125,22 @@ function ninjaSprite(options) {
 		}
 	};
 
-    function jump(ev) {
-
-		//console.log(ev)
-		if (ev.keyCode == 38 && !that.jumping) {
+    function jump() {
+	
 			that.jumping = true;
 			that.leaning = false;
 			that.image = ninjaJump;
 			that.frameIndex = 0,
 				that.ticksPerFrame = 6;
-		}
-
 	}
 
-	function lean(ev) {
-
-		if (ev.keyCode == 40 && !that.leaning ) {
+	function lean() {
+	
 			that.jumping = false;
 			that.leaning = true;
 			that.image = ninjaLean;
 			that.frameIndex = 0;
 			that.ticksPerFrame = 6;
-		}
-
-
 	}
 
 	function run() { 

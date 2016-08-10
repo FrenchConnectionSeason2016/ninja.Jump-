@@ -18,7 +18,7 @@ function createObstacles(options) {
             obstaclesArray = that.obstaclesArray,
             newObstacle,
             randomNum,
-            distance = 70,
+            distance = 100,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
             lastBonus = goldBonusesArray[goldBonusesArray.length-1];
 

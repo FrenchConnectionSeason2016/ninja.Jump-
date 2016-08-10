@@ -22,7 +22,7 @@ function createBonuses(options) {
             newGoldBonus,
             newGreyBonus,
             randomNum,
-            distance = 70,
+            distance = 100,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
             lastBonus = goldBonusesArray[goldBonusesArray.length - 1];
 
@@ -53,7 +53,7 @@ function createBonuses(options) {
                 canvas: bonusesCanvas,
                 context: bonusesContext,
                 image: goldStar,
-                positionX: width + distance,
+                positionX: width + 70,
                 positionY: positionY,
                 width: goldStar.width / 7,
                 height: goldStar.height,
