@@ -35,6 +35,8 @@ function startGame() {
 		frameIndex: 0,
 		jumping: false,
 		leaning: false,
+		x: 270,
+		y: 336
 	});
 
 	backgroundImage = createBackgroundImage({

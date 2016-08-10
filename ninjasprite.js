@@ -8,8 +8,6 @@ function ninjaSprite(options) {
         ninjaRun;
 
 	//numberOfFrames = options.numberOfFrames || 1;
-
-
     
     ninjaRun = new Image();
 	ninjaRun.src = "images/run.png";
@@ -30,7 +28,9 @@ function ninjaSprite(options) {
 	that.leaning= options.leaning;
     that.frameIndex = options.frameIndex;
 	that.jumpIndex = 0;
-	that.altitude= 336;
+	that.y= options.y;
+	that.x= options.x;
+	that.collided = false;
 	//UPDATE
 
 	that.update = function () {
@@ -57,16 +57,18 @@ function ninjaSprite(options) {
 
 		if (that.jumping) {
 			
-			if ( that.jumpIndex < 17) {
-				that.altitude -= 6;
-			} else {
-				that.altitude += 6;
+			if ( that.jumpIndex < 17 ) {
+				that.y -= 6;
+			} else {		   
+
+                    that.y += 6;			
+				
 			}
 
 			that.jumpIndex+=1;
 
 		} else {
-			that.altitude = 336;
+			that.y = options.y;
 		}
 		
 
@@ -86,15 +88,15 @@ function ninjaSprite(options) {
 
 
 		// 	if ( jumpIndex < 17) {
-		// 		altitude -= 6;
+		// 		y -= 6;
 		// 	} else {
-		// 		altitude += 6;
+		// 		y += 6;
 		// 	}
 
 		// 	jumpIndex+=1;
 
 		// } else {
-		// 	altitude = 336;
+		// 	y = 336;
 		// }
 		
 		    that.context.drawImage(
@@ -103,8 +105,8 @@ function ninjaSprite(options) {
 			0,
 			that.width / that.numberOfFrames,
 			that.height,
-			270,
-			that.altitude,
+			that.x,
+			that.y,
 			that.width / that.numberOfFrames,
 			that.height);
 
@@ -138,7 +140,7 @@ function ninjaSprite(options) {
 
 	function lean(ev) {
 
-		if (ev.keyCode == 40 && !that.leaning) {
+		if (ev.keyCode == 40 && !that.leaning ) {
 			that.jumping = false;
 			that.leaning = true;
 			that.image = ninjaLean;
@@ -149,13 +151,16 @@ function ninjaSprite(options) {
 
 	}
 
-	function run() {
+	function run() { 
 
 		that.jumping = false;
 		that.leaning = false;
 		that.image = ninjaRun;
 		that.ticksPerFrame = 4;
+		that.frameIndex= 0;
 	}
+
+	
 
     that.jump = jump;
     that.run = run;
