@@ -1,3 +1,5 @@
+var score = 0;
+
 function drawScore(bonusP1, bonusP2) {
     var canvas = document.getElementById("points");
     var ctx = canvas.getContext("2d");
@@ -5,7 +7,7 @@ function drawScore(bonusP1, bonusP2) {
     canvas.height = 422;
     ctx.font = "18px Arial";
     ctx.fillStyle = "red";
-    var score=0;
+    //var score=0;
 
 
 
@@ -24,4 +26,11 @@ function drawScore(bonusP1, bonusP2) {
     ctx.fillText(bonusP2, 420, 20);
     
 }
+
+    //Napravih go na polovin sekunda, moje da se promeni
+    window.setInterval(function scoreIncrease() {
+        score += 1;
+  
+    }, 500);
+
 
