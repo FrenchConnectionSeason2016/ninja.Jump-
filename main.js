@@ -1,4 +1,8 @@
-
+var highscore = 0,
+	score = 0,
+	level = 1,
+	previousScore = 0,
+	lastLevel = 1;
 
 function startGame() {
 	// start screen logic
@@ -10,12 +14,11 @@ function startGame() {
 		backgroundImage,
 		obstacles,
 		bonuses,
-		level,
         goldBonuses = 0,
         greyBonuses = 0,
 		goldNinja,
-		greyNinja;
-	
+		greyNinja,
+		bonusForLife = 1;
 
 	function gameLoop() {
 
@@ -23,31 +26,49 @@ function startGame() {
 		obstacles.renderAndUpdate().spawn(bonuses.goldBonusesArray);
 		bonuses.renderAndUpdate().spawn(obstacles.obstaclesArray);
 
-		goldNinja.render();
-		goldNinja.update();
-		goldNinja.updateJumpIndex();
+		if (!goldNinja.dead) {
+			goldNinja.render();
+			goldNinja.update();
+			goldNinja.updateJumpIndex();
 
-		if(collideWithBonus(goldNinja, bonuses.goldBonusesArray)){
-			goldBonuses+=1;
-		}
-		collideWithObstacles(goldNinja, obstacles.obstaclesArray);
-		if(goldNinja.collided){
-			return;
+			if (collideWithBonus(goldNinja, bonuses.goldBonusesArray)) {
+				goldBonuses += 1;
+			}
+			collideWithObstacles(goldNinja, obstacles.obstaclesArray);
 		}
 
-		greyNinja.render();
-		greyNinja.update();
-		greyNinja.updateJumpIndex();
+		if (!greyNinja.dead) {
+			greyNinja.render();
+			greyNinja.update();
+			greyNinja.updateJumpIndex();
 
-		if(collideWithBonus(greyNinja, bonuses.greyBonusesArray)){
-			greyBonuses+=1;
+			if (collideWithBonus(greyNinja, bonuses.greyBonusesArray)) {
+				greyBonuses += 1;
+			}
+			collideWithObstacles(greyNinja, obstacles.obstaclesArray);
 		}
-		collideWithObstacles(greyNinja, obstacles.obstaclesArray);
-		// if(greyNinja.collided){
-		// 	return;
-		// }
+
 
 		drawScore(goldBonuses, greyBonuses);
+
+		if (level > lastLevel) {
+			if (greyNinja.dead) {
+				greyNinja.dead = false;
+				greyNinja.run();
+			}
+			if (goldNinja.dead) {
+				goldNinja.dead = false;
+				goldNinja.run();
+			}
+
+		}
+
+		if (goldNinja.dead && greyNinja.dead) {
+			highscore = score;
+			highscore += 10 * (goldBonuses + greyBonuses);
+			console.log(highscore);
+			return;
+		}
 
 		window.requestAnimationFrame(gameLoop);
 	}
@@ -108,19 +129,19 @@ function startGame() {
 	});
 
 
-	window.addEventListener('keydown', function(event){
-		if(event.keyCode === 38 && !goldNinja.jumping){
+	window.addEventListener('keydown', function (event) {
+		if (event.keyCode === 38 && !goldNinja.jumping) {
 			goldNinja.jump();
 		}
-		if(event.keyCode === 40 && !goldNinja.leaning){
+		if (event.keyCode === 40 && !goldNinja.leaning) {
 			goldNinja.lean();
 		}
 		// w
-		if(event.keyCode === 87 && !greyNinja.jumping){
+		if (event.keyCode === 87 && !greyNinja.jumping) {
 			greyNinja.jump();
 		}
 		// s
-		if(event.keyCode === 83 && !greyNinja.leaning){
+		if (event.keyCode === 83 && !greyNinja.leaning) {
 			greyNinja.lean();
 		}
 	});
@@ -133,6 +154,7 @@ function startGame() {
 
 	gameLoop();
 
+	console.log(highscore);
 	console.log("game over");
 
 	// end screen logic

@@ -21,7 +21,7 @@ function createBonuses(options) {
             goldBonusesArray = that.goldBonusesArray,
             newGoldBonus,
             newGreyBonus,
-            distance = 100,
+            distance = 80 + level * 30,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
             lastBonus = goldBonusesArray[goldBonusesArray.length - 1];
 

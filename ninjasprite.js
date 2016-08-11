@@ -25,18 +25,17 @@ function ninjaSprite(options) {
 	that.jumpIndex = 0;
 	that.y= options.y;
 	that.x= options.x;
-	that.collided = false;
+	that.tickCount = 0;
+	that.dead = false;
 	//UPDATE
 
 	that.update = function () {
-
 		
+		that.tickCount += 1;
 
-		tickCount += 1;
+		if (that.tickCount > ticksPerFrame) {
 
-		if (tickCount > ticksPerFrame) {
-
-			tickCount = 0;
+			that.tickCount = 0;
 
 			if (that.frameIndex < that.numberOfFrames - 1) {
 
@@ -105,12 +104,6 @@ function ninjaSprite(options) {
 			that.width / that.numberOfFrames,
 			that.height);
 
-	//	var ctx = that.canvas.getContext('2d');
-	//	ctx.beginPath();
-	//	ctx.moveTo(0, 250);
-	//	ctx.lineTo(600, 250);
-	//	ctx.stroke();
-//
 
 		if ((that.jumping || that.leaning) && that.frameIndex === (that.numberOfFrames - 1)) {
 
@@ -121,12 +114,11 @@ function ninjaSprite(options) {
 	};
 
     function jump() {
-	
 			that.jumping = true;
 			that.leaning = false;
 			that.image = that.jumpImage;
 			that.frameIndex = 0,
-				that.ticksPerFrame = 6;
+			that.ticksPerFrame = 6;
 	}
 
 	function lean() {
@@ -140,6 +132,7 @@ function ninjaSprite(options) {
 
 	function run() { 
 
+		that.jumpIndex= 0;
 		that.jumping = false;
 		that.leaning = false;
 		that.image = that.runImage;
@@ -147,7 +140,6 @@ function ninjaSprite(options) {
 		that.frameIndex= 0;
 	}
 
-	
 
     that.jump = jump;
     that.run = run;

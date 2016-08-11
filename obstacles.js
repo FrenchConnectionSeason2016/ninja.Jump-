@@ -4,7 +4,8 @@ function createObstacles(options) {
         jumpImage = document.getElementById('beach-chair'),
         duckImage = document.getElementById('umbrella'),
         width = options.width,
-        height = options.height;
+        height = options.height,
+        speed=3;
 
     obstaclesCanvas.width = width;
     obstaclesCanvas.height = height;
@@ -18,10 +19,14 @@ function createObstacles(options) {
             obstaclesArray = that.obstaclesArray,
             newObstacle,
             randomNum,
-            distance = 100,
+            distance = 80 + level * 30,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
             lastBonus = goldBonusesArray[goldBonusesArray.length-1];
-
+        
+        // no obstacles when new level
+        if(level*200 - speed * 17 <= score && score <= level*200){
+            return that;
+        }
         if(lastObstacle && lastObstacle.positionX + lastObstacle.width + distance > width){
             return that;
         }

@@ -20,10 +20,12 @@ function collideWithObstacles(ninja, obstaclesArray) {
         var obstacleRadius = obstacle.width / 2 - 15;
 
         var dist = distance(ninjaX, ninjaY, obstacleX, obstacleY);
+        var offset = 20;
 
         if (dist < (ninjaRadius + obstacleRadius)) {
-
-            ninja.collided = true;
+            ninja.dead = true;
+            lastLevel = level;
+            ninja.context.clearRect(ninja.x - offset, ninja.y - offset, ninja.width + offset*2, ninja.height + offset*2 );
             return true;
         }
     }

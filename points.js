@@ -1,6 +1,4 @@
-var score = 0,
-level = 1,
-previousScore = 0;
+
 
 function drawScore(bonusP1, bonusP2) {
     var canvas = document.getElementById("points");
@@ -31,11 +29,11 @@ function drawScore(bonusP1, bonusP2) {
         
         score += level;
 
-        if(score >= (previousScore + 1000)){
+        if(score >= (previousScore + 200)){
             previousScore= score;
             level+=1;
         }
-        console.log(level);
+        //console.log(level);
        // console.log(previousScore)
   
     }, 50);
