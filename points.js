@@ -29,7 +29,7 @@ function drawScore(bonusP1, bonusP2) {
         
         score += level;
 
-        if(score >= (previousScore + 200)){
+        if(score >= (previousScore + 1000)){
             previousScore= score;
             level+=1;
         }

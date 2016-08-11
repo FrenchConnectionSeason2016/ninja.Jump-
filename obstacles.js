@@ -24,7 +24,7 @@ function createObstacles(options) {
             lastBonus = goldBonusesArray[goldBonusesArray.length-1];
         
         // no obstacles when new level
-        if(level*200 - speed * 17 <= score && score <= level*200){
+        if(level*1000 - speed * 17 <= score && score <= level*1000){
             return that;
         }
         if(lastObstacle && lastObstacle.positionX + lastObstacle.width + distance > width){
@@ -73,7 +73,7 @@ function createObstacles(options) {
         for (i = 0; i < that.obstaclesArray.length; i += 1) {
             obstacle = that.obstaclesArray[i];
             obstacle.render().update();
-            if(obstacle.positionX < 0 - obstacle.imageWidth){
+            if(obstacle.positionX + obstacle.imageWidth < -5){
                 indexesToRemove.push(i);
             }
         }
