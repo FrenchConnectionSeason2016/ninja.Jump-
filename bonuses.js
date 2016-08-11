@@ -23,7 +23,8 @@ function createBonuses(options) {
             newGreyBonus,
             distance = 80 + level * 30,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
-            lastBonus = goldBonusesArray[goldBonusesArray.length - 1];
+            lastBonus = goldBonusesArray[goldBonusesArray.length - 1],
+            bonusGeneratorIndex = 2;
 
         if (lastObstacle && lastObstacle.positionX + lastObstacle.width + distance > width) {
             return that;
@@ -32,8 +33,12 @@ function createBonuses(options) {
         if (lastBonus && lastBonus.positionX + lastBonus.width + distance > width) {
             return that;
         }
+        
+        if(level >= 5){
+            bonusGeneratorIndex = 1;
+        }
 
-        if (obstaclesArray.length > 2) {
+        if (obstaclesArray.length > bonusGeneratorIndex) {
 
             newGreyBonus = createBonus({
                 canvas: bonusesCanvas,
