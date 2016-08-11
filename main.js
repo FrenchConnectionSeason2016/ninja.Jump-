@@ -2,10 +2,12 @@ var highscore = 0,
 	score = 0,
 	level = 1,
 	previousScore = 0,
-	lastLevel = 1;
+	lastLevel = 1,
+	teamName ="French baguette";
 
 function startGame() {
 	// start screen logic
+
 
 	var ninja,
 		canvas,
@@ -18,7 +20,9 @@ function startGame() {
         greyBonuses = 0,
 		goldNinja,
 		greyNinja,
-		bonusForLife = 1;
+		audio;
+
+	document.getElementsByTagName('h1')[0].style.display = "block";
 
 	function gameLoop() {
 
@@ -64,9 +68,11 @@ function startGame() {
 		}
 
 		if (goldNinja.dead && greyNinja.dead) {
+			audio.pause();
 			highscore = score;
 			highscore += 10 * (goldBonuses + greyBonuses);
 			console.log(highscore);
+			generateEndScreen();
 			return;
 		}
 
@@ -128,6 +134,11 @@ function startGame() {
 		positionY: 280
 	});
 
+	audio = new Audio("audio/audio.mp3");
+	audio.addEventListener('ended', function () {
+		this.currentTime = 0;
+		this.play();
+	}, false);
 
 	window.addEventListener('keydown', function (event) {
 		if (event.keyCode === 38 && !goldNinja.jumping) {
@@ -145,16 +156,18 @@ function startGame() {
 			greyNinja.lean();
 		}
 	});
-	
 
+	audio.play();
 	gameLoop();
 
-	console.log(highscore);
-	console.log("game over");
-
-	// end screen logic
 }
 
+function generateEndScreen(){
+	document.getElementById('team-name').innerHTML += teamName;
+	document.getElementById('high-score').innerHTML += highscore;
+	document.getElementById('end-screen').style.display = "block";
+
+}
 
 
 window.addEventListener('load', startGame, false);
