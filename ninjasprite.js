@@ -110,12 +110,12 @@ function ninjaSprite(options) {
 			that.width / that.numberOfFrames,
 			that.height);
 
-		var ctx = that.canvas.getContext('2d');
-		ctx.beginPath();
-		ctx.moveTo(0, 250);
-		ctx.lineTo(600, 250);
-		ctx.stroke();
-
+	//	var ctx = that.canvas.getContext('2d');
+	//	ctx.beginPath();
+	//	ctx.moveTo(0, 250);
+	//	ctx.lineTo(600, 250);
+	//	ctx.stroke();
+//
 
 		if ((that.jumping || that.leaning) && that.frameIndex === (that.numberOfFrames - 1)) {
 
