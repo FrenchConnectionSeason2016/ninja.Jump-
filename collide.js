@@ -26,6 +26,8 @@ function collideWithObstacles(ninja, obstaclesArray) {
             ninja.dead = true;
             lastLevel = level;
             ninja.context.clearRect(ninja.x - offset, ninja.y - offset, ninja.width + offset*2, ninja.height + offset*2 );
+            //ninja.context.drawImage(document.getElementById('grey-dead'), ninja.x, ninja.y);
+                        
             return true;
         }
     }
@@ -54,7 +56,6 @@ function collideWithBonus(ninja, bonusesArray) {
 
         if (dist < (ninjaRadius + bonusRadius)) {
             bonus.isCollected = true;
-            //debugger;
             bonus.removeBonus();
             bonusesArray.splice(i,1);
             return true;

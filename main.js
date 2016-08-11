@@ -145,12 +145,7 @@ function startGame() {
 			greyNinja.lean();
 		}
 	});
-
-	points = drawScore({
-		width: WIDTH,
-		height: HEIGHT
-	});
-
+	
 
 	gameLoop();
 

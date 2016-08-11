@@ -78,9 +78,6 @@ function createBonuses(options) {
             goldLength = that.goldBonusesArray.length,
         greyLength = that.greyBonusesArray.length;
 
-        // console.log(length);
-        // console.log(that.greyBonusesArray.length);
-
         for (i = 0; i < goldLength; i += 1) {
             bonus = that.goldBonusesArray[i];
             bonus.render().update();
@@ -168,9 +165,6 @@ function createBonus(options) {
             that.height + 2 * offset
         );
 
-        // drawImage
-        //debugger;
-
         that.context.drawImage(
             that.image,
             that.frameIndex * that.imageWidth / that.numberOfFrames,
@@ -182,7 +176,6 @@ function createBonus(options) {
             that.width,
             that.height);
 
-        //debugger;
         return that;
     }
 

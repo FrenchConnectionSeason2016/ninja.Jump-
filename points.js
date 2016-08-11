@@ -33,8 +33,6 @@ function drawScore(bonusP1, bonusP2) {
             previousScore= score;
             level+=1;
         }
-        //console.log(level);
-       // console.log(previousScore)
   
     }, 50);
 
