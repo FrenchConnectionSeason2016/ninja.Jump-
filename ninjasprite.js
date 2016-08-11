@@ -8,21 +8,16 @@ function ninjaSprite(options) {
         ninjaRun;
 
 	//numberOfFrames = options.numberOfFrames || 1;
-    
-    ninjaRun = new Image();
-	ninjaRun.src = "images/gold-ninja.png";
 
-	ninjaJump = new Image();
-	ninjaJump.src = 'images/jump.png';
-
-	ninjaLean = new Image();
-	ninjaLean.src = 'images/lean.png';
 
     that.canvas = options.canvas;
 	that.context = options.context;
 	that.width = options.width;
 	that.height = options.height;
-	that.image = ninjaRun;
+	that.image = options.runImage;
+	that.runImage = options.runImage;
+	that.leanImage = options.leanImage;
+	that.jumpImage = options.jumpImage;
 	that.numberOfFrames = options.numberOfFrames || 1;
 	that.jumping = options.jumping;
 	that.leaning= options.leaning;
@@ -129,7 +124,7 @@ function ninjaSprite(options) {
 	
 			that.jumping = true;
 			that.leaning = false;
-			that.image = ninjaJump;
+			that.image = that.jumpImage;
 			that.frameIndex = 0,
 				that.ticksPerFrame = 6;
 	}
@@ -138,7 +133,7 @@ function ninjaSprite(options) {
 	
 			that.jumping = false;
 			that.leaning = true;
-			that.image = ninjaLean;
+			that.image = that.leanImage;
 			that.frameIndex = 0;
 			that.ticksPerFrame = 6;
 	}
@@ -147,7 +142,7 @@ function ninjaSprite(options) {
 
 		that.jumping = false;
 		that.leaning = false;
-		that.image = ninjaRun;
+		that.image = that.runImage;
 		that.ticksPerFrame = 4;
 		that.frameIndex= 0;
 	}

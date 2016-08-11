@@ -15,7 +15,7 @@ function startGame() {
         greyBonuses = 0,
 		goldNinja,
 		greyNinja;
-
+	
 
 	function gameLoop() {
 
@@ -66,6 +66,9 @@ function startGame() {
 		frameIndex: 0,
 		jumping: false,
 		leaning: false,
+		jumpImage: document.getElementById('gold-jump'),
+		runImage: document.getElementById('gold-run'),
+		leanImage: document.getElementById('gold-lean'),
 		x: 350,
 		y: 336
 	});
@@ -80,6 +83,9 @@ function startGame() {
 		frameIndex: 0,
 		jumping: false,
 		leaning: false,
+		jumpImage: document.getElementById('grey-jump'),
+		runImage: document.getElementById('grey-run'),
+		leanImage: document.getElementById('grey-lean'),
 		x: 150,
 		y: 336
 	});
