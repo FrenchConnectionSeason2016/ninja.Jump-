@@ -10,7 +10,7 @@ function ninjaSprite(options) {
 	//numberOfFrames = options.numberOfFrames || 1;
     
     ninjaRun = new Image();
-	ninjaRun.src = "images/run.png";
+	ninjaRun.src = "images/gold-ninja.png";
 
 	ninjaJump = new Image();
 	ninjaJump.src = 'images/jump.png';
@@ -77,10 +77,10 @@ function ninjaSprite(options) {
 
 	//RENDER
 	that.render = function () {
-		var offset=15;
+		var offset=20;
 
 
-		that.context.clearRect(that.x - offset, that.y - offset, that.width / that.numberOfFrames + 2*offset, that.height + 2*offset);	
+		that.context.clearRect(that.x - offset, that.y - offset*4, that.width / that.numberOfFrames + 2*offset, that.height + 8*offset);	
 
 	
 		// if (that.jumping) {

@@ -7,26 +7,22 @@ function drawScore(bonusP1, bonusP2) {
     var ctx = canvas.getContext("2d");
     canvas.width = 800;
     canvas.height = 422;
-    ctx.font = "18px Arial";
-    ctx.fillStyle = "black";
-    //var score=0;
+    var y =25;
+    ctx.font = "18px Impact";
+    ctx.fillStyle = "black";// "#180063"
 
-
-
-	ctx.fillText('Score: ' + score, 10, 20);
-    ctx.fillText('Level: '+ level, 10, 40 )
-    ctx.fillText('Bonuses: ', 200, 20);
+	ctx.fillText('Score: ' + score, 10, y);
+    ctx.fillText('Level: '+ level, 10, y+20 );
+    ctx.fillText('Bonuses: ', 190, y);
     
-    var star1 = new Image();
-    star1.src = "images/Star (1).png";
+    var goldStar = document.getElementById('gold-bonus');
     
-    ctx.drawImage(star1, 275, 2, 20, 20);
-    ctx.fillText(bonusP1, 300, 20);
-    var star2 = new Image();    
-    star2.src = "images/Star (2).png";
+    ctx.drawImage(goldStar, 275, 7, 20, 20);
+    ctx.fillText(bonusP1, 300, y);
+    var greyStar = document.getElementById('grey-bonus');
     
-    ctx.drawImage(star2, 400, 2, 20, 20);
-    ctx.fillText(bonusP2, 420, 20);
+    ctx.drawImage(greyStar, 350, 7, 20, 20);
+    ctx.fillText(bonusP2, 375, y);
     
 }
 
@@ -37,7 +33,7 @@ function drawScore(bonusP1, bonusP2) {
 
         if(score >= (previousScore + 1000)){
             previousScore= score;
-            level+=1
+            level+=1;
         }
         console.log(level);
        // console.log(previousScore)

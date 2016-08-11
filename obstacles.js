@@ -39,7 +39,7 @@ function createObstacles(options) {
                 positionY: options.positionY,
                 width: jumpImage.width,
                 height: jumpImage.height,
-                speed: 4,
+                speed: 3,
             });
             obstaclesArray.push(newObstacle);
         }
@@ -51,7 +51,7 @@ function createObstacles(options) {
                  positionY: options.positionY - duckImage.height / 1.75,
                  width: duckImage.width,
                  height: (duckImage.height / 5) * 2,
-                 speed: 4,
+                 speed: 3,
              });
              obstaclesArray.push(newObstacle);
         }
@@ -95,7 +95,7 @@ function createObstacle(options) {
 
         that.lastX = that.positionX;
         that.lastY = that.positionY;
-        that.positionX -= that.speed;
+        that.positionX -= (that.speed + level);
 
         return that;
     }

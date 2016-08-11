@@ -21,7 +21,6 @@ function createBonuses(options) {
             goldBonusesArray = that.goldBonusesArray,
             newGoldBonus,
             newGreyBonus,
-            randomNum,
             distance = 100,
             lastObstacle = obstaclesArray[obstaclesArray.length - 1],
             lastBonus = goldBonusesArray[goldBonusesArray.length - 1];
@@ -44,7 +43,7 @@ function createBonuses(options) {
                 positionY: positionY,
                 width: goldStar.width / 7,
                 height: goldStar.height,
-                speed: 4,
+                speed: 3,
                 numberOfFrames: 7,
                 ticksPerFrame: 5,
             });
@@ -57,7 +56,7 @@ function createBonuses(options) {
                 positionY: positionY,
                 width: goldStar.width / 7,
                 height: goldStar.height,
-                speed: 4,
+                speed: 3,
                 numberOfFrames: 7,
                 ticksPerFrame: 5,
             });
@@ -138,7 +137,7 @@ function createBonus(options) {
         var that = this;
 
         that.lastX = that.positionX;
-        that.positionX -= that.speed;
+        that.positionX -= (that.speed + level);
 
         // frameIndex
         that.tickCount += 1;
@@ -171,16 +170,6 @@ function createBonus(options) {
 
         // drawImage
         //debugger;
-
-        // console.log( that.image);
-        // console.log(that.frameIndex * that.imageWidth / that.numberOfFrames);
-        // console.log(0);
-        // console.log(that.width);
-        // console.log(that.height);
-        // console.log(that.positionX);
-        // console.log(that.positionY);
-        // console.log(that.width);
-        // console.log(that.height);
 
         that.context.drawImage(
             that.image,

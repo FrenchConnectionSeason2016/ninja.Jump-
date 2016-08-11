@@ -29,7 +29,7 @@ function createBackgroundImage(options){
 
     function update(){
             var self = this;
-            self.canvasX -= self.defaultSpeed;
+            self.canvasX -= ( self.defaultSpeed + level);
 
             if(self.width - Math.abs(self.canvasX) <= 0){
                 self.canvasX = 0;
@@ -48,7 +48,7 @@ function createBackgroundImage(options){
         canvasY: 0,
         render: render,
         update: update,
-        defaultSpeed: 5
+        defaultSpeed: 4
     };
 
     return background;
