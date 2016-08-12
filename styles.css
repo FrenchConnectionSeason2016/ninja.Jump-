@@ -41,7 +41,7 @@ canvas{
     display: none;
 }*/
 
-#end-screen, h1{
+#end-screen{
     display: none;
     text-align: center;
 }

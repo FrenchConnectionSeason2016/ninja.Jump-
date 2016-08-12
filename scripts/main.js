@@ -3,7 +3,7 @@ var highscore = 0,
 	level = 1,
 	previousScore = 0,
 	lastLevel = 1,
-	teamName = "French baguette";
+	teamName = "";
 
 function generateStartScreen() {
 
